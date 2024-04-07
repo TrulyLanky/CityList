@@ -1,0 +1,42 @@
+<!-- inherit from base_template.html-->
+{% extends "base_template.html" %}
+{%block tile%}
+City List
+{%endblock%}
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+
+<form method="post" action="{% url 'cities' %}">
+    <table>
+        {% csrf_token %}
+        <tr>
+            <th>Name</th>
+            <th>Website</th>
+            <th>Active</th>
+            <th>State</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            {% for field in form %}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td><button class="btn btn-primary" name="save">Save</button></td> <!-- Use Bootstrap button class -->
+        </tr>
+        {% for city in city_objects %}
+        <tr>
+            <td>{{ city.name }}</td>
+            <td>{{ city.state }}</td>
+            <td>{{ city.is_active }}</td>
+            <td>{{ city.website }}</td>
+            <td>
+                <a href="{% url 'edit-city' city.id %}" class="btn btn-primary">Edit</a> <!-- Edit button -->
+                <a href="{% url 'delete-city' city.id %}" class="btn btn-danger">Delete</a> <!-- Delete button -->
+                <a href="{% url 'city-details' city.id %}" class="btn btn-primary">Explore {{ city.name }}</a> <!-- City details button -->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+
+{% endblock %}

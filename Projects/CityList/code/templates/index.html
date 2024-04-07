@@ -1,10 +1,24 @@
-<!-- inherit from base.html-->
-{% extends "base_template.html" %}
+{% extends 'base_template.html' %}
 
-<!-- Replace block content in base_template.html -->
 {% block content %}
-<h1>City List</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h1>Welcome to My Website!</h1>
+            <p>This is an extremely basic home page.</p>
 
-<h2>More to come from Josh</h2>
-
+            <!-- Block featuring a random city -->
+            <div class="card">
+                <div class="card-header">
+                    Featured City
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ random_city.name }}</h5>
+                    <p class="card-text">State: {{ random_city.get_state_display }}</p>
+                    <a href="{{ random_city.get_absolute_url }}" class="btn btn-primary">Explore {{ random_city.name }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

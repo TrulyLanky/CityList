@@ -1,4 +1,5 @@
 {% load static %}
+{% load django_bootstrap5 %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,25 +7,32 @@
    <title>UCCS CS Students</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Bootstrap demo</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+   <style>
+     .nav-link {
+       font-size: 20px; /* Set the font size to 20 pixels */
+       font-weight: bold; /* Set the font weight to bold */
+       border: 3px solid black; /* Add a border with 1px thickness and black color */
+       border-radius: 5px; /* Add border radius for rounded corners */
+       padding: 5px 10px; /* Add padding to space the text inside the button */
+     }
+   </style>
  </head>
 
  <body>
    <div class="container-fluid">
 
      <!-- Navbar-->
-     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-       <img src="{% static 'images/uccs_logo.gif' %}">
+     <nav class="navbar navbar-expand-lg bg-warning navbar-light">
        <div class="container-fluid">
+         <img src="{% static 'images/house_icon.png' %}">
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
            <div class="navbar-nav">
-             <!--  {% url 'index' %}  is defined in url path to dynamically create url -->
              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-             <a class="nav-link" href="#">Menu 2</a>
+             <a class="nav-link" href="/cities">Cities</a>
              <a class="nav-link" href="#">Menu 3</a>
              {% if user.is_authenticated %}
                <a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}">Logout {{user}}</a>
@@ -37,7 +45,7 @@
      </nav>
 
        <div class="col-sm-10">
-         <!-- add block content from html template -->
+         <!-- add block content to html template -->
          {% block content %}
          {% endblock %}
        </div>

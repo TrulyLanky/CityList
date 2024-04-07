@@ -1,4 +1,15 @@
 from django.forms import ModelForm
+from .models import City
+
+
+class CityForm(ModelForm):
+    class Meta:
+        model = City
+        fields = ['name', 'website', 'is_active', 'state', ]
+
+
+"""
+from django.forms import ModelForm
 from .models import Project, Portfolio, Student
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -30,3 +41,4 @@ class StudentForm(ModelForm):
     class Meta:
         model = Student
         fields = ['name', 'email', 'major', 'portfolio', ]
+"""
