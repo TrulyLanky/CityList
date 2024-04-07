@@ -1,0 +1,11 @@
+-------------------------
+      City                
+-------------------------
+ - name: string                
+ - is_active: boolean          
+ - website: URL                
+ - state: string               
+--------------------------
+ + __str__(): string           
+ + get_absolute_url(): URL     
+--------------------------
