@@ -1,0 +1,55 @@
+<!-- inherit from base_template.html-->
+{% extends "CityList/base_template.html" %}
+{%block tile%}
+City List
+{%endblock%}
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+
+<form method="post" action="{% url 'cities' %}">
+    <table>
+        {% csrf_token %}
+        <tr>
+            <th>Name</th>
+            <th>Website</th>
+            <th>Active</th>
+            <th>State</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            {% for field in form %}
+            <td>{{ field }}</td>
+            {% endfor %}
+            <td>
+                {% if request.user.is_staff %}
+                <button class="btn btn-outline-primary" name="save">Save</button></td> <!-- Use Bootstrap button class -->
+                {% endif %}
+        </tr>
+        {% for city in city_objects %}
+        <tr>
+            <td>{{ city.name }}</td>
+            <td>{{ city.state }}</td>
+            <td>{{ city.is_active }}</td>
+            <td>{{ city.website }}</td>
+            <td>
+                {% if city.user == request.user %}
+                <form method="post" action="{% url 'edit-city' city.id %}" style="display: inline;"> <!-- Edit button -->
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-primary">Edit</button>
+                </form>
+
+                <form method="post" action="{% url 'delete-city' city.id %}" style="display: inline;"> <!-- Delete button -->
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                </form>
+                {% endif %}
+
+                <a href="{% url 'city-details' city.id %}" class="btn btn-outline-primary">Explore {{ city.name }}</a> <!-- City details button -->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+
+{% endblock %}

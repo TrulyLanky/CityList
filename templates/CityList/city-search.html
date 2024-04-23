@@ -1,0 +1,51 @@
+{% extends "CityList/base_template.html" %}
+{% block title %}City Search{% endblock %}
+
+{% block content %}
+<h1>City Search</h1>
+
+<div class="container">
+    <form method="GET" class="row g-3">
+        <!--state selection -->
+        <div class="col-md-5">
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                {{ form.state }}
+            </div>
+        </div>
+        <!-- minimum walk score input -->
+        <div class="col-md-5">
+            <div class="mb-3">
+                <label for="min_walk_score" class="form-label">Minimum Walk Score</label>
+                <input type="number" id="min_walk_score" name="min_walk_score" class="form-control" value="{{ request.GET.min_walk_score }}">
+            </div>
+        </div>
+        <!-- search button -->
+        <div class="col-md-2">
+            <div class="mb-3">
+                <label class="invisible">Search</label>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- displaying cities -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h2>{% if cities %}Filtered Cities{% else %}Cities{% endif %}</h2>
+            <ul class="list-group">
+                {% for city in cities %}
+                <li class="list-group-item">
+                    {{ city.name }}, {{ city.state }}
+                    {% if city.walk_score %}
+                        (Walk Score: {{ city.walk_score }})
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li class="list-group-item">No cities found</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

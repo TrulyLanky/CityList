@@ -1,0 +1,21 @@
+<!-- edit_city.html -->
+{% extends "CityList/base_template.html" %}
+{% block content %}
+<h1>Edit City: {{ city.name }}</h1>
+
+<!-- Display current details of the city -->
+<p>Current Details:</p>
+<ul>
+    <li>Name: {{ city.name }}</li>
+    <li>Website: {{ city.website }}</li>
+    <li>Active: {{ city.is_active }}</li>
+    <li>State: {{ city.state }}</li>
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} <!-- Render the form fields as paragraph elements -->
+    <button type="submit">Save Changes</button>
+</form>
+
+{% endblock %}

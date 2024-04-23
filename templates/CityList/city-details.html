@@ -1,0 +1,14 @@
+<!-- inherit from base_template.html-->
+{% extends "CityList/base_template.html" %}
+
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+    <h1>City: {{ city.name }}</h1>
+    <p><strong>State:</strong> {{ city.state }}</p>
+    <p><strong>Active Status:</strong> {{ portfolio.is_active }}</p>
+    <p><strong>Website:</strong> {{ city.website }}</p>
+
+
+
+{% endblock %}
